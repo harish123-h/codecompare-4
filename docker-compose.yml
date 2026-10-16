@@ -1,0 +1,14 @@
+services:
+  server:
+    build:
+      context: ./apps/server
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    env_file: .env
+    environment:
+      RUNNER_MODE: docker
+      RUNNER_IMAGE: codecompare-runner:local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped

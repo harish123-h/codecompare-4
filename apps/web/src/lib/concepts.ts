@@ -1,0 +1,20 @@
+import type {Language,Codes} from '../types';
+export type Concept={title:string;description:string;codes:Codes};
+const make=(c:string,p:string,j:string):Codes=>({c,python:p,java:j});
+export const concepts:Concept[]=[
+{title:'Variables',description:'Names store values. Types are explicit in C and Java, while Python infers types at runtime.',codes:make('int age = 18;','age = 18','int age = 18;')},
+{title:'Conditionals',description:'Branch execution with if/else based on a Boolean expression.',codes:make('if (score >= 50) { puts("Pass"); } else { puts("Try again"); }','if score >= 50:\n    print("Pass")\nelse:\n    print("Try again")','if (score >= 50) { System.out.println("Pass"); } else { System.out.println("Try again"); }')},
+{title:'For loops',description:'Repeat a block a known number of times.',codes:make('for (int i = 0; i < 5; i++) printf("%d\\n", i);','for i in range(5):\n    print(i)','for (int i = 0; i < 5; i++) System.out.println(i);')},
+{title:'While loops',description:'Repeat while a condition remains true.',codes:make('int n=3; while(n>0){printf("%d\\n",n);n--; }','n = 3\nwhile n > 0:\n    print(n)\n    n -= 1','int n=3; while(n>0){System.out.println(n);n--;}')},
+{title:'Functions',description:'Package reusable behavior behind a named function or method.',codes:make('int square(int n) { return n*n; }','def square(n):\n    return n * n','static int square(int n) { return n*n; }')},
+{title:'Arrays / lists',description:'Store ordered collections. C arrays have fixed size; Python lists are dynamic.',codes:make('int nums[] = {2,4,6};','nums = [2, 4, 6]','int[] nums = {2,4,6};')},
+{title:'Strings',description:'Strings represent text, but their memory and mutability differ by language.',codes:make('char name[] = "Ada";','name = "Ada"','String name = "Ada";')},
+{title:'Recursion',description:'A function calls itself and must have a base case.',codes:make('int fact(int n){return n<=1?1:n*fact(n-1);}','def fact(n):\n    return 1 if n <= 1 else n * fact(n-1)','static int fact(int n){return n<=1?1:n*fact(n-1);}')},
+{title:'Pointers vs references',description:'C pointers hold addresses; Java references and Python names refer to objects.',codes:make('int n=7; int *ptr=&n;','n = 7\nref = n  # Python name refers to an object','int n=7; Integer ref=n;')},
+{title:'Structures / classes',description:'Group related data; Java uses classes, while C offers struct.',codes:make('struct Point { int x; int y; };','point = {"x": 2, "y": 3}','class Point { int x, y; }')},
+{title:'File I/O',description:'Open a file, write content, and close or use a context manager.',codes:make('FILE *f=fopen("out.txt","w"); if(f){fprintf(f,"hello\\n");fclose(f);}','with open("out.txt", "w") as f:\n    f.write("hello\\n")','try (var w = new java.io.PrintWriter("out.txt")) { w.println("hello"); } catch (java.io.IOException e) { e.printStackTrace(); }')},
+{title:'Exceptions',description:'Handle runtime failures without immediately terminating the program.',codes:make('/* C commonly checks return codes instead of exceptions. */','try:\n    value = int("42")\nexcept ValueError:\n    print("Invalid number")','try { int value = Integer.parseInt("42"); } catch (NumberFormatException e) { System.out.println("Invalid number"); }')},
+{title:'Object-oriented programming',description:'Objects combine state and behavior; Java is class-based.',codes:make('struct Counter { int value; };','class Counter:\n    def __init__(self):\n        self.value = 0','class Counter { int value = 0; }')},
+{title:'Input',description:'Read text from standard input and parse it when needed.',codes:make('int n; if (scanf("%d", &n)==1) printf("%d\\n", n);','n = int(input())\nprint(n)','Scanner sc = new Scanner(System.in); int n = sc.nextInt(); System.out.println(n);')}
+];
+export const conceptLanguageNames:Record<Language,string>={c:'C',python:'Python',java:'Java'};

@@ -1,0 +1,1 @@
+import {Router} from 'express';import {config} from '../config.js';const router=Router();router.get('/',(_req,res)=>res.json({ok:true,service:'codecompare-api',provider:config.provider,model:config.model,time:new Date().toISOString()}));export default router;

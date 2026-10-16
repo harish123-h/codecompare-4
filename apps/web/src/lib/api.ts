@@ -1,0 +1,5 @@
+import type {Codes,Language,RunResult} from '../types';
+export const API=import.meta.env.VITE_API_URL||'http://localhost:4000';
+export async function translate(language:Language,code:string):Promise<Partial<Codes>>{const r=await fetch(`${API}/api/translate`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({language,code})});const d=await r.json();if(!r.ok)throw new Error(d.error||'Translation failed');return d.translations;}
+export async function runCode(language:Language,code:string,stdin=''):Promise<RunResult>{const r=await fetch(`${API}/api/execute`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({language,code,stdin})});const d=await r.json();if(!r.ok)throw new Error(d.error||'Execution failed');return d;}
+export async function health(){try{const r=await fetch(`${API}/api/health`);return r.ok?await r.json():{ok:false};}catch{return {ok:false};}}

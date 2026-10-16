@@ -1,0 +1,5 @@
+FROM debian:trixie-slim
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends gcc g++ python3 openjdk-21-jdk-headless coreutils ca-certificates && rm -rf /var/lib/apt/lists/* && useradd --uid 10001 --create-home runner
+USER 10001:10001
+WORKDIR /tmp
+ENV HOME=/tmp
